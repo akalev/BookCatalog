@@ -3,8 +3,8 @@
 Clone the `book catalog` repository using git:
 
 ```
-git clone https://github.com/angular/angular-seed.git
-cd angular-seed
+git clone https://github.com/akalev/BookCatalogFE.git
+cd BookCatalogFE
 ```
 
 ### Install Dependencies
