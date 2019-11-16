@@ -1,0 +1,23 @@
+logging:
+  level:
+    org.springframework: ERROR
+    ee.catalog.book: DEBUG
+  pattern:
+    console: "%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"
+    file: "%d %p %c{1.} [%t] %m%n"
+  file:
+    name: book_catalog.log
+
+spring:
+  liquibase:
+    change-log: classpath:db/liquibase-changelog.xml
+  jpa:
+    hibernate:
+      ddl-auto: none
+  h2:
+    console:
+      enabled: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/book_catalog
+    username: book_catalog_manager
+    password: bookcatalog

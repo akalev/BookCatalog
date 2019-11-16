@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book catalog</title>
+</head>
+<body>
+<!--<table ng-table="tableParams" class="table" show-filter="true">-->
+<!--    <tr ng-repeat="book in $data">-->
+<!--        <td title="'Title'" filter="{ title: 'text'}" sortable="'title'">{{book.title}}</td>-->
+<!--        <td title="'Author'" filter="{ author: 'text'}" sortable="'author'">{{book.author}}</td>-->
+<!--        <td title="'Year'" filter="{ year: 'number'}" sortable="'year'">{{book.year}}</td>-->
+<!--    </tr>-->
+<!--</table>-->
+
+<div class="container-fluid row mt-1">
+    <div class="col">
+        <div class="brn-group pull-right">
+            <button class="btn btn-default" ng-if="isEditing" ng-click="cancelChanges()">
+                Cancel
+            </button>
+            <button class="btn btn-primary" ng-if="!isEditing" ng-click="isEditing = true">
+                Edit
+            </button>
+            <button class="btn btn-primary" ng-if="isEditing" ng-disabled="hasChanges()"
+                    ng-click="saveChanges()">
+                Save
+            </button>
+            <button class="btn btn-default" ng-click="add()">
+                Add
+            </button>
+        </div>
+        <table id="tableBookCatalog" ng-table="tableParams" class="table table-bordered table-hover table-condensed editable-table"
+               ng-form="tableForm" disable-filter="isAdding" demo-tracked-table="tableTracker">
+            <colgroup>
+                <col width="70%"/>
+                <col width="12%"/>
+                <col width="13%"/>
+                <col width="5%"/>
+            </colgroup>
+            <tr ng-repeat="row in $data" ng-form="rowForm" demo-tracked-table-row="row">
+                <td title="'Name'" filter="{name: 'text'}" sortable="'name'" ng-switch="isEditing"
+                    ng-class="name.$dirty ? 'bg-warning' : ''" ng-form="name" demo-tracked-table-cell>
+                    <span ng-switch-default class="editable-text">{{row.name}}</span>
+                    <div class="controls" ng-class="name.$invalid && name.$dirty ? 'has-error' : ''" ng-switch-when="true">
+                        <input type="text" name="name" ng-model="row.name" class="editable-input form-control input-sm"
+                               required/>
+                    </div>
+                </td>
+                <td title="'Age'" filter="{age: 'number'}" sortable="'age'" ng-switch="isEditing"
+                    ng-class="age.$dirty ? 'bg-warning' : ''" ng-form="age" demo-tracked-table-cell>
+                    <span ng-switch-default class="editable-text">{{row.age}}</span>
+                    <div class="controls" ng-class="age.$invalid && age.$dirty ? 'has-error' : ''" ng-switch-when="true">
+                        <input type="number" name="age" ng-model="row.age" class="editable-input form-control input-sm"
+                               required/>
+                    </div>
+                </td>
+                <td title="'Money'" filter="{money: 'number'}" sortable="'money'" ng-switch="isEditing"
+                    ng-class="money.$dirty ? 'bg-warning' : ''" ng-form="money" demo-tracked-table-cell>
+                    <span ng-switch-default class="editable-text">{{row.money}}</span>
+                    <div class="controls" ng-class="money.$invalid && money.$dirty ? 'has-error' : ''" ng-switch-when="true">
+                        <input type="number" name="money" ng-model="row.money" class="editable-input form-control input-sm"
+                               required/>
+                    </div>
+                </td>
+                <td>
+                    <button class="btn btn-danger btn-sm" ng-click="del(row)" ng-disabled="!isEditing">Delete</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
